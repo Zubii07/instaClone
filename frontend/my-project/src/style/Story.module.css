@@ -1,0 +1,57 @@
+.storyProgress {
+  height: 2px;
+  background: rgba(255, 255, 255, 0.3);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.storyProgressBar {
+  height: 100%;
+  background: white;
+  transition: width 0.1s linear;
+}
+
+.storyContainer {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.storyContainer::-webkit-scrollbar {
+  display: none;
+}
+
+.storyModal {
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.storyItem {
+  transition: transform 0.2s ease;
+}
+
+.storyItem:hover {
+  transform: scale(1.05);
+}
+
+.loadingSpinner {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

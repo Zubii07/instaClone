@@ -1,0 +1,17 @@
+.container {
+  background: linear-gradient(to bottom, #ffffff, #fafafa);
+}
+
+.inputField:focus {
+  border-color: #dbdbdb;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
+}
+
+.loginButton {
+  background: linear-gradient(45deg, #f58529, #dd2a7b, #8134af, #515bd4);
+  transition: opacity 0.3s ease;
+}
+
+.loginButton:hover {
+  opacity: 0.9;
+}
