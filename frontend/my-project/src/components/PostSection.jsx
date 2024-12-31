@@ -20,7 +20,6 @@ const Post = ({
   const [editMode, setEditMode] = useState(false);
   const [editedTitle, setEditedTitle] = useState(title);
   const [editedContent, setEditedContent] = useState(content);
-  const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
   const toggleDropdown = () => {
     setDropdownVisible((prev) => !prev);
@@ -29,7 +28,7 @@ const Post = ({
   const handleEdit = async () => {
     try {
       await axios.put(
-        `${API_BASE_URL}/api/posts/${postId}/edit`,
+        `http://localhost:5000/api/posts/${postId}/edit`,
         {
           title: editedTitle,
           content: editedContent,
@@ -45,7 +44,7 @@ const Post = ({
 
   const handleDelete = async () => {
     try {
-      await axios.delete(`${API_BASE_URL}/api/posts/${postId}/delete`, {
+      await axios.delete(`http://localhost:5000/api/posts/${postId}/delete`, {
         data: { userId: user.id },
         withCredentials: true,
       });
@@ -171,7 +170,7 @@ const PostSection = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await fetch(`${API_BASE_URL}/api/posts`, {
+        const response = await fetch("http://localhost:5000/api/posts", {
           credentials: "include",
         });
 
