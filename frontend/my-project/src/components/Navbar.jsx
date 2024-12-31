@@ -19,17 +19,18 @@ const Navbar = () => {
   const [hasUnread, setHasUnread] = useState(false);
   const [isCreatePostModalOpen, setIsCreatePostModalOpen] = useState(false);
   const [isPrivate, setIsPrivate] = useState(false);
+
   const { logout, user } = useAuth();
   const { showToast } = useToast();
   const navigate = useNavigate();
-  const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+
   useEffect(() => {
     // Fetch initial privacy status
     const fetchPrivacyStatus = async () => {
       if (!user) return;
       try {
         const response = await axios.get(
-          `${API_BASE_URL}/api/users/${user.id}`,
+          `http://localhost:5000/api/users/${user.id}`,
           { withCredentials: true }
         );
         setIsPrivate(response.data.user.isPrivate);
@@ -48,7 +49,7 @@ const Navbar = () => {
 
       try {
         const response = await axios.get(
-          `${API_BASE_URL}/api/notifications/${user.id}`,
+          `http://localhost:5000/api/notifications/${user.id}`,
           { withCredentials: true }
         );
         const unread = response.data.some(
@@ -89,7 +90,7 @@ const Navbar = () => {
 
     try {
       await axios.put(
-        `${API_BASE_URL}/api/notifications/mark-as-read/${user.id}`,
+        `http://localhost:5000/api/notifications/mark-as-read/${user.id}`,
         {},
         { withCredentials: true }
       );

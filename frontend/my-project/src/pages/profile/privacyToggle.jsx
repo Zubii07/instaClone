@@ -10,7 +10,6 @@ const PrivacyToggle = ({
 }) => {
   const [isPrivate, setIsPrivate] = useState(initialPrivacy);
   const { showToast } = useToast();
-  const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
   useEffect(() => {
     setIsPrivate(initialPrivacy);
@@ -19,7 +18,7 @@ const PrivacyToggle = ({
   const togglePrivacy = async () => {
     try {
       const response = await axios.put(
-        `${API_BASE_URL}/api/users/toggle-privacy`,
+        "http://localhost:5000/api/users/toggle-privacy",
         {},
         { withCredentials: true }
       );

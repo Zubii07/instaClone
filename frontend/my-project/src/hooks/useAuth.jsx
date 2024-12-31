@@ -5,11 +5,10 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
   const fetchUser = async () => {
     try {
-      const response = await fetch(`${API_BASE_URL}/api/users/profile`, {
+      const response = await fetch("http://localhost:5000/api/users/profile", {
         method: "GET",
         credentials: "include", // Include cookies in the request
       });
@@ -18,8 +17,6 @@ export const AuthProvider = ({ children }) => {
         const data = await response.json();
         setUser(data.user); // Update the user state with the fetched data
       } else {
-        const errorText = await response.text();
-        console.error("Response text:", errorText);
         setUser(null); // Clear user state if unauthorized
       }
     } catch (error) {
@@ -42,7 +39,7 @@ export const AuthProvider = ({ children }) => {
   // Logout function
   const logout = async () => {
     try {
-      await fetch(`${API_BASE_URL}/api/users/logout`, {
+      await fetch("http://localhost:5000/api/users/logout", {
         method: "POST",
         credentials: "include",
       });

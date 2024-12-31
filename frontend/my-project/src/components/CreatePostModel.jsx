@@ -8,7 +8,6 @@ export const CreatePostModal = ({ isOpen, onClose }) => {
   const [images, setImages] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const { user, loading } = useAuth();
-  const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
   if (loading) {
     console.log("User data is still loading...");
@@ -50,7 +49,7 @@ export const CreatePostModal = ({ isOpen, onClose }) => {
     images.forEach((image) => formData.append("media", image)); // Add files
 
     try {
-      const response = await fetch(`${API_BASE_URL}/api/posts`, {
+      const response = await fetch("http://localhost:5000/api/posts", {
         method: "POST",
         credentials: "include",
         body: formData,

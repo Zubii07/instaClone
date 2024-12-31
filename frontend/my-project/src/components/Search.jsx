@@ -7,7 +7,6 @@ const Search = () => {
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
   const handleSearch = async (e) => {
     const searchQuery = e.target.value;
@@ -21,7 +20,7 @@ const Search = () => {
     try {
       setLoading(true);
       const response = await fetch(
-        `${API_BASE_URL}/api/search?query=${searchQuery}`,
+        `http://localhost:5000/api/search?query=${searchQuery}`,
         { credentials: "include" }
       );
 

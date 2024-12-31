@@ -15,7 +15,6 @@ const EditableProfilePicture = ({
   const [isDeleting, setIsDeleting] = useState(false);
   const fileInputRef = useRef(null);
   const { showToast } = useToast();
-  dotenv.config();
 
   const handleImageClick = () => {
     if (isLoggedInUser) fileInputRef.current?.click();
@@ -36,7 +35,7 @@ const EditableProfilePicture = ({
     try {
       setIsDeleting(true);
       const response = await axios.delete(
-        `${API_BASE_URL}/api/upload/delete-profile-picture/${id}`,
+        `http://localhost:5000/api/upload/delete-profile-picture/${id}`,
         {
           withCredentials: true,
         }
@@ -89,7 +88,7 @@ const EditableProfilePicture = ({
         formData.append("picture", file);
 
         const response = await axios.post(
-          `${API_BASE_URL}/api/upload/profile-picture/${id}`,
+          `http://localhost:5000/api/upload/profile-picture/${id}`,
           formData,
           {
             headers: {

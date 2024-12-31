@@ -12,7 +12,6 @@ const SignupForm = () => {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
   const { showToast } = useToast();
-  const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -22,7 +21,7 @@ const SignupForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(`${API_BASE_URL}/api/users/register`, {
+      const response = await fetch("http://localhost:5000/api/users/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),

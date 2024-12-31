@@ -4,13 +4,12 @@ import { Heart } from "lucide-react";
 const Like = ({ postId, initialLikes }) => {
   const [likes, setLikes] = useState(initialLikes);
   const [isLiked, setIsLiked] = useState(false);
-  const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
   useEffect(() => {
     const fetchLikeStatus = async () => {
       try {
         const response = await fetch(
-          `${API_BASE_URL}/api/likes/${postId}/likes`,
+          `http://localhost:5000/api/likes/${postId}/likes`,
           {
             method: "GET",
             credentials: "include",
@@ -33,8 +32,8 @@ const Like = ({ postId, initialLikes }) => {
   const handleLike = async () => {
     try {
       const endpoint = isLiked
-        ? `${API_BASE_URL}/api/likes/${postId}/unlike`
-        : `${API_BASE_URL}/api/likes/${postId}/like`;
+        ? `http://localhost:5000/api/likes/${postId}/unlike`
+        : `http://localhost:5000/api/likes/${postId}/like`;
 
       const method = isLiked ? "DELETE" : "POST";
       const response = await fetch(endpoint, {

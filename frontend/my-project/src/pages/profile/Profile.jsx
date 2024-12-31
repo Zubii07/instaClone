@@ -20,13 +20,12 @@ const Profile = () => {
   const [isFollowing, setIsFollowing] = useState(false);
   const [isPrivate, setIsPrivate] = useState(false);
   const [isFollowRequestPending, setIsFollowRequestPending] = useState(false);
-  const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
   const fetchUserPosts = async () => {
     try {
       const endpoint = id
-        ? `${API_BASE_URL}/api/posts/user/${id}`
-        : `${API_BASE_URL}/api/posts/user/${user.id}`;
+        ? `http://localhost:5000/api/posts/user/${id}`
+        : `http://localhost:5000/api/posts/user/${user.id}`;
       const response = await axios.get(endpoint, { withCredentials: true });
       setPosts(response.data);
       // Update the posts count in profile state when posts are fetched
@@ -49,18 +48,18 @@ const Profile = () => {
     const fetchProfile = async () => {
       try {
         const endpoint = id ? `/api/users/${id}` : `/api/users/profile`;
-        const response = await axios.get(`${API_BASE_URL}${endpoint}`, {
+        const response = await axios.get(`http://localhost:5000${endpoint}`, {
           withCredentials: true,
         });
         const profileData = response.data.user;
         // Fetch followers and following counts
         const [followersRes, followingRes] = await Promise.all([
           axios.get(
-            `${API_BASE_URL}/api/follow/followers-count/${id || user.id}`,
+            `http://localhost:5000/api/follow/followers-count/${id || user.id}`,
             { withCredentials: true }
           ),
           axios.get(
-            `${API_BASE_URL}/api/follow/following-count/${id || user.id}`,
+            `http://localhost:5000/api/follow/following-count/${id || user.id}`,
             { withCredentials: true }
           ),
         ]);
@@ -86,7 +85,7 @@ const Profile = () => {
           return;
         }
         const response = await axios.post(
-          `${API_BASE_URL}/api/follow/is-following/${followingId}`,
+          `http://localhost:5000/api/follow/is-following/${followingId}`,
           { followerId, followingId },
           { withCredentials: true }
         );
@@ -98,7 +97,7 @@ const Profile = () => {
     const fetchFollowRequestStatus = async () => {
       try {
         const response = await axios.get(
-          `${API_BASE_URL}/api/follow/check-follow-status`,
+          `http://localhost:5000/api/follow/check-follow-status`,
           {
             params: { followerId: user.id, followingId: id || user.id },
             withCredentials: true,
@@ -123,7 +122,7 @@ const Profile = () => {
   const handleFollow = async () => {
     try {
       const response = await axios.post(
-        `${API_BASE_URL}/api/follow/toggle-follow/${profile.id}`,
+        `http://localhost:5000/api/follow/toggle-follow/${profile.id}`,
         { userId: user.id },
         { withCredentials: true }
       );
