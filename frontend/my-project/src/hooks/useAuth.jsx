@@ -1,14 +1,17 @@
 import { useContext, createContext, useState, useEffect } from "react";
+import dotenv from "dotenv";
+dotenv.config();
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
   const fetchUser = async () => {
     try {
-      const response = await fetch("http://localhost:5000/api/users/profile", {
+      const response = await fetch(`${API_BASE_URL}/api/users/profile`, {
         method: "GET",
         credentials: "include", // Include cookies in the request
       });
@@ -39,7 +42,7 @@ export const AuthProvider = ({ children }) => {
   // Logout function
   const logout = async () => {
     try {
-      await fetch("http://localhost:5000/api/users/logout", {
+      await fetch(`${API_BASE_URL}/api/users/logout`, {
         method: "POST",
         credentials: "include",
       });

@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import styles from "./../../../src/style/LoginForm.module.css";
 import { useAuth } from "../../hooks/useAuth";
 import { useToast } from "../../hooks/useToast";
+import dotenv from "dotenv";
+dotenv.config();
 
 const LoginForm = () => {
   const [formData, setFormData] = useState({
@@ -13,6 +15,7 @@ const LoginForm = () => {
   const navigate = useNavigate();
   const { user, login } = useAuth();
   const { showToast } = useToast();
+  const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
   // Redirect if user is already logged in
   useEffect(() => {
@@ -29,7 +32,7 @@ const LoginForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("http://localhost:5000/api/users/login", {
+      const response = await fetch(`${API_BASE_URL}/api/users/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),

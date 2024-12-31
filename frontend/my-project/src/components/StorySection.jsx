@@ -4,9 +4,10 @@ import { AiOutlinePlus, AiOutlineClose, AiOutlineDelete } from "react-icons/ai";
 import { BiLoaderAlt } from "react-icons/bi";
 import styles from "../style/Story.module.css";
 import { useAuth } from "../hooks/useAuth";
+import dotenv from "dotenv";
+dotenv.config();
 
 const STORY_DURATION = 5000;
-
 const StorySection = () => {
   const [storiesByUser, setStoriesByUser] = useState({});
   const [currentStory, setCurrentStory] = useState(null);
@@ -16,12 +17,13 @@ const StorySection = () => {
   const [progress, setProgress] = useState(0);
   const [uploadingStory, setUploadingStory] = useState(false);
   const { user } = useAuth();
+  const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
   // Fetch and group stories by user
   const fetchStories = async () => {
     try {
       setLoading(true);
-      const response = await axios.get("http://localhost:5000/api/stories", {
+      const response = await axios.get(`${API_BASE_URL}/api/stories`, {
         withCredentials: true,
       });
       const storiesData = response.data.stories || [];
@@ -72,7 +74,7 @@ const StorySection = () => {
 
       try {
         setUploadingStory(true);
-        await axios.post("http://localhost:5000/api/stories/add", formData, {
+        await axios.post(`${API_BASE_URL}/api/stories/add`, formData, {
           headers: { "Content-Type": "multipart/form-data" },
           withCredentials: true,
         });
@@ -98,12 +100,9 @@ const StorySection = () => {
 
   const deleteStory = async (storyId) => {
     try {
-      await axios.delete(
-        `http://localhost:5000/api/stories/delete/${storyId}`,
-        {
-          withCredentials: true,
-        }
-      );
+      await axios.delete(`${API_BASE_URL}/api/stories/delete/${storyId}`, {
+        withCredentials: true,
+      });
       await fetchStories();
     } catch (error) {
       console.error("Error deleting story:", error);

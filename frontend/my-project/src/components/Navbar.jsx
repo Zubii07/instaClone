@@ -6,12 +6,12 @@ import axios from "axios";
 import { CreatePostModal } from "./CreatePostModel";
 import PrivacyToggle from "../pages/profile/privacyToggle";
 import Search from "./Search";
+import dotenv from "dotenv";
+dotenv.config();
 import {
   FaHome,
   FaPlusSquare,
   FaHeart,
-  FaLock,
-  FaUnlock,
   FaSignOutAlt,
   FaBars,
 } from "react-icons/fa";
@@ -21,18 +21,17 @@ const Navbar = () => {
   const [hasUnread, setHasUnread] = useState(false);
   const [isCreatePostModalOpen, setIsCreatePostModalOpen] = useState(false);
   const [isPrivate, setIsPrivate] = useState(false);
-
   const { logout, user } = useAuth();
   const { showToast } = useToast();
   const navigate = useNavigate();
-
+  const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
   useEffect(() => {
     // Fetch initial privacy status
     const fetchPrivacyStatus = async () => {
       if (!user) return;
       try {
         const response = await axios.get(
-          `http://localhost:5000/api/users/${user.id}`,
+          `${API_BASE_URL}/api/users/${user.id}`,
           { withCredentials: true }
         );
         setIsPrivate(response.data.user.isPrivate);
@@ -51,7 +50,7 @@ const Navbar = () => {
 
       try {
         const response = await axios.get(
-          `http://localhost:5000/api/notifications/${user.id}`,
+          `${API_BASE_URL}/api/notifications/${user.id}`,
           { withCredentials: true }
         );
         const unread = response.data.some(
@@ -92,7 +91,7 @@ const Navbar = () => {
 
     try {
       await axios.put(
-        `http://localhost:5000/api/notifications/mark-as-read/${user.id}`,
+        `${API_BASE_URL}/api/notifications/mark-as-read/${user.id}`,
         {},
         { withCredentials: true }
       );

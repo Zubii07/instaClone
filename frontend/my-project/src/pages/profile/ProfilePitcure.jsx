@@ -2,6 +2,8 @@ import { useState, useRef } from "react";
 import axios from "axios";
 import { Pencil, X } from "lucide-react";
 import { useToast } from "../../hooks/useToast";
+import dotenv from "dotenv";
+dotenv.config();
 
 const EditableProfilePicture = ({
   currentImage,
@@ -15,6 +17,7 @@ const EditableProfilePicture = ({
   const [isDeleting, setIsDeleting] = useState(false);
   const fileInputRef = useRef(null);
   const { showToast } = useToast();
+  dotenv.config();
 
   const handleImageClick = () => {
     if (isLoggedInUser) fileInputRef.current?.click();
@@ -35,7 +38,7 @@ const EditableProfilePicture = ({
     try {
       setIsDeleting(true);
       const response = await axios.delete(
-        `http://localhost:5000/api/upload/delete-profile-picture/${id}`,
+        `${API_BASE_URL}/api/upload/delete-profile-picture/${id}`,
         {
           withCredentials: true,
         }
@@ -88,7 +91,7 @@ const EditableProfilePicture = ({
         formData.append("picture", file);
 
         const response = await axios.post(
-          `http://localhost:5000/api/upload/profile-picture/${id}`,
+          `${API_BASE_URL}/api/upload/profile-picture/${id}`,
           formData,
           {
             headers: {

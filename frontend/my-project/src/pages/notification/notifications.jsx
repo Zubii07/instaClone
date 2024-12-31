@@ -10,19 +10,22 @@ import {
 import axios from "axios";
 import { useAuth } from "../../hooks/useAuth";
 import { useToast } from "../../hooks/useToast";
+import dotenv from "dotenv";
+dotenv.config();
 
 const Notifications = () => {
   const { user, loading } = useAuth();
   const [notifications, setNotifications] = useState([]);
   const [fetching, setFetching] = useState(true);
   const { showToast } = useToast();
+  const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
   useEffect(() => {
     const fetchNotifications = async () => {
       if (!user) return;
 
       try {
         const response = await axios.get(
-          `http://localhost:5000/api/notifications/${user.id}`,
+          `${API_BASE_URL}/api/notifications/${user.id}`,
           { withCredentials: true }
         );
         console.log("Notifications:", response.data); // Debug log
@@ -40,7 +43,7 @@ const Notifications = () => {
 
   const deleteNotification = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/api/notifications/${id}`, {
+      await axios.delete(`${API_BASE_URL}/api/notifications/${id}`, {
         withCredentials: true,
       });
 
@@ -55,10 +58,9 @@ const Notifications = () => {
     }
   };
   const handleFollowRequestAction = async (triggeredById, action) => {
-    console.log("Payload being sent:", { triggeredById, action });
     try {
       const response = await axios.post(
-        `http://localhost:5000/api/follow/manage-follow-request`,
+        `${API_BASE_URL}/api/follow/manage-follow-request`,
         { triggeredById, action },
         { withCredentials: true }
       );
@@ -87,8 +89,6 @@ const Notifications = () => {
           response?.data?.message || "Action completed successfully.",
         duration: 3000,
       });
-
-      console.log(response.data.message); // Log the success message
     } catch (error) {
       console.error(
         "Error managing follow request:",

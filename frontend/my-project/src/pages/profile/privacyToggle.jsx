@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useToast } from "../../hooks/useToast";
 import { FaLock, FaUnlock } from "react-icons/fa";
+import dotenv from "dotenv";
+dotenv.config();
 
 const PrivacyToggle = ({
   initialPrivacy = false,
@@ -10,6 +12,7 @@ const PrivacyToggle = ({
 }) => {
   const [isPrivate, setIsPrivate] = useState(initialPrivacy);
   const { showToast } = useToast();
+  const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
   useEffect(() => {
     setIsPrivate(initialPrivacy);
@@ -18,7 +21,7 @@ const PrivacyToggle = ({
   const togglePrivacy = async () => {
     try {
       const response = await axios.put(
-        "http://localhost:5000/api/users/toggle-privacy",
+        `${API_BASE_URL}/api/users/toggle-privacy`,
         {},
         { withCredentials: true }
       );

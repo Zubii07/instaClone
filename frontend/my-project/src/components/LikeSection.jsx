@@ -1,15 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { Heart } from "lucide-react";
+import dotenv from "dotenv";
+dotenv.config();
 
 const Like = ({ postId, initialLikes }) => {
   const [likes, setLikes] = useState(initialLikes);
   const [isLiked, setIsLiked] = useState(false);
+  const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
   useEffect(() => {
     const fetchLikeStatus = async () => {
       try {
         const response = await fetch(
-          `http://localhost:5000/api/likes/${postId}/likes`,
+          `${API_BASE_URL}/api/likes/${postId}/likes`,
           {
             method: "GET",
             credentials: "include",
@@ -32,8 +35,8 @@ const Like = ({ postId, initialLikes }) => {
   const handleLike = async () => {
     try {
       const endpoint = isLiked
-        ? `http://localhost:5000/api/likes/${postId}/unlike`
-        : `http://localhost:5000/api/likes/${postId}/like`;
+        ? `${API_BASE_URL}/api/likes/${postId}/unlike`
+        : `${API_BASE_URL}/api/likes/${postId}/like`;
 
       const method = isLiked ? "DELETE" : "POST";
       const response = await fetch(endpoint, {

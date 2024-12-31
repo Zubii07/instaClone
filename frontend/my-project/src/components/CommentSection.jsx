@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { MoreVertical, Edit2, Trash2 } from "lucide-react";
+import dotenv from "dotenv";
+dotenv.config();
 
 export const CommentSection = ({ postId, loggedInUserId, postAuthorId }) => {
   const [comments, setComments] = useState([]);
@@ -10,13 +12,12 @@ export const CommentSection = ({ postId, loggedInUserId, postAuthorId }) => {
   const [showAll, setShowAll] = useState(false);
   const [openDropdownId, setOpenDropdownId] = useState(null);
   const dropdownRef = useRef(null);
+  const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
   useEffect(() => {
     const fetchComments = async () => {
       try {
-        const response = await fetch(
-          `http://localhost:5000/api/comments/${postId}`
-        );
+        const response = await fetch(`${API_BASE_URL}/api/comments/${postId}`);
         const data = await response.json();
         setComments(data);
       } catch (error) {
@@ -44,7 +45,7 @@ export const CommentSection = ({ postId, loggedInUserId, postAuthorId }) => {
     if (newComment.trim() === "") return;
 
     try {
-      const response = await fetch("http://localhost:5000/api/comments", {
+      const response = await fetch("${API_BASE_URL}/api/comments", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -65,7 +66,7 @@ export const CommentSection = ({ postId, loggedInUserId, postAuthorId }) => {
   const handleEditComment = async (commentId) => {
     try {
       const response = await fetch(
-        `http://localhost:5000/api/comments/${commentId}`,
+        `${API_BASE_URL}/api/comments/${commentId}`,
         {
           method: "PUT",
           headers: {
@@ -88,7 +89,7 @@ export const CommentSection = ({ postId, loggedInUserId, postAuthorId }) => {
   const handleDeleteComment = async (commentId) => {
     try {
       const response = await fetch(
-        `http://localhost:5000/api/comments/${commentId}`,
+        `${API_BASE_URL}s/api/comments/${commentId}`,
         {
           method: "DELETE",
           credentials: "include",

@@ -4,6 +4,8 @@ import { MoreVertical, Pencil, Trash } from "lucide-react";
 import { useAuth } from "../hooks/useAuth";
 import { CommentSection } from "../components/CommentSection";
 import Like from "../components/LikeSection";
+import dotenv from "dotenv";
+dotenv.config();
 
 const Post = ({
   postId,
@@ -20,6 +22,7 @@ const Post = ({
   const [editMode, setEditMode] = useState(false);
   const [editedTitle, setEditedTitle] = useState(title);
   const [editedContent, setEditedContent] = useState(content);
+  const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
   const toggleDropdown = () => {
     setDropdownVisible((prev) => !prev);
@@ -28,7 +31,7 @@ const Post = ({
   const handleEdit = async () => {
     try {
       await axios.put(
-        `http://localhost:5000/api/posts/${postId}/edit`,
+        `${API_BASE_URL}/api/posts/${postId}/edit`,
         {
           title: editedTitle,
           content: editedContent,
@@ -44,7 +47,7 @@ const Post = ({
 
   const handleDelete = async () => {
     try {
-      await axios.delete(`http://localhost:5000/api/posts/${postId}/delete`, {
+      await axios.delete(`${API_BASE_URL}/api/posts/${postId}/delete`, {
         data: { userId: user.id },
         withCredentials: true,
       });
@@ -170,7 +173,7 @@ const PostSection = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/posts", {
+        const response = await fetch(`${API_BASE_URL}/api/posts`, {
           credentials: "include",
         });
 

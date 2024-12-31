@@ -1,12 +1,15 @@
 import React, { useState } from "react";
 import { IoIosSearch } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
+import dotenv from "dotenv";
+dotenv.config();
 
 const Search = () => {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
   const handleSearch = async (e) => {
     const searchQuery = e.target.value;
@@ -20,7 +23,7 @@ const Search = () => {
     try {
       setLoading(true);
       const response = await fetch(
-        `http://localhost:5000/api/search?query=${searchQuery}`,
+        `${API_BASE_URL}/api/search?query=${searchQuery}`,
         { credentials: "include" }
       );
 
