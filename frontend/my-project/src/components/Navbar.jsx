@@ -6,8 +6,6 @@ import axios from "axios";
 import { CreatePostModal } from "./CreatePostModel";
 import PrivacyToggle from "../pages/profile/privacyToggle";
 import Search from "./Search";
-import dotenv from "dotenv";
-dotenv.config();
 import {
   FaHome,
   FaPlusSquare,

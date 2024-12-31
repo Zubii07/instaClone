@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "../../../src/style/SignupForm.module.css";
 import { useToast } from "../../hooks/useToast";
-import dotenv from "dotenv";
-dotenv.config();
 
 const SignupForm = () => {
   const [formData, setFormData] = useState({

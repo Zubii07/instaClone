@@ -2,8 +2,6 @@ import { useState, useRef } from "react";
 import axios from "axios";
 import { Pencil, X } from "lucide-react";
 import { useToast } from "../../hooks/useToast";
-import dotenv from "dotenv";
-dotenv.config();
 
 const EditableProfilePicture = ({
   currentImage,

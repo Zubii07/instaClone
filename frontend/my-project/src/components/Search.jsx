@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { IoIosSearch } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
-import dotenv from "dotenv";
-dotenv.config();
 
 const Search = () => {
   const [query, setQuery] = useState("");

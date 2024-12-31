@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { X, Upload, Loader } from "lucide-react";
 import { useAuth } from "../hooks/useAuth";
-import dotenv from "dotenv";
-dotenv.config();
 
 export const CreatePostModal = ({ isOpen, onClose }) => {
   const [title, setTitle] = useState("");

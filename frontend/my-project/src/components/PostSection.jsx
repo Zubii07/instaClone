@@ -4,8 +4,6 @@ import { MoreVertical, Pencil, Trash } from "lucide-react";
 import { useAuth } from "../hooks/useAuth";
 import { CommentSection } from "../components/CommentSection";
 import Like from "../components/LikeSection";
-import dotenv from "dotenv";
-dotenv.config();
 
 const Post = ({
   postId,

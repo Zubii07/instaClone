@@ -1,5 +1,4 @@
 import React from "react";
-
 import StorySection from "../../components/StorySection";
 import Navbar from "../../components/Navbar";
 import PostSection from "../../components/PostSection";

@@ -3,8 +3,6 @@ import { useNavigate } from "react-router-dom";
 import styles from "./../../../src/style/LoginForm.module.css";
 import { useAuth } from "../../hooks/useAuth";
 import { useToast } from "../../hooks/useToast";
-import dotenv from "dotenv";
-dotenv.config();
 
 const LoginForm = () => {
   const [formData, setFormData] = useState({

@@ -10,8 +10,6 @@ import {
 import axios from "axios";
 import { useAuth } from "../../hooks/useAuth";
 import { useToast } from "../../hooks/useToast";
-import dotenv from "dotenv";
-dotenv.config();
 
 const Notifications = () => {
   const { user, loading } = useAuth();

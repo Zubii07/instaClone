@@ -4,8 +4,6 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import PrivateAccountMessage from "./PrivateAccountMessage";
 import EditableProfilePicture from "./ProfilePitcure";
-import dotenv from "dotenv";
-dotenv.config();
 
 const Profile = () => {
   const { user, setUser } = useAuth();

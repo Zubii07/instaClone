@@ -4,8 +4,6 @@ import { AiOutlinePlus, AiOutlineClose, AiOutlineDelete } from "react-icons/ai";
 import { BiLoaderAlt } from "react-icons/bi";
 import styles from "../style/Story.module.css";
 import { useAuth } from "../hooks/useAuth";
-import dotenv from "dotenv";
-dotenv.config();
 
 const STORY_DURATION = 5000;
 const StorySection = () => {

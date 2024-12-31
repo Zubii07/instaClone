@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Heart } from "lucide-react";
-import dotenv from "dotenv";
-dotenv.config();
 
 const Like = ({ postId, initialLikes }) => {
   const [likes, setLikes] = useState(initialLikes);

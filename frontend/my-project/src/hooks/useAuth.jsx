@@ -1,6 +1,4 @@
 import { useContext, createContext, useState, useEffect } from "react";
-import dotenv from "dotenv";
-dotenv.config();
 
 const AuthContext = createContext();
 
@@ -20,6 +18,8 @@ export const AuthProvider = ({ children }) => {
         const data = await response.json();
         setUser(data.user); // Update the user state with the fetched data
       } else {
+        const errorText = await response.text();
+        console.error("Response text:", errorText);
         setUser(null); // Clear user state if unauthorized
       }
     } catch (error) {

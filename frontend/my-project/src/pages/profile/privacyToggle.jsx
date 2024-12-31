@@ -2,8 +2,6 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useToast } from "../../hooks/useToast";
 import { FaLock, FaUnlock } from "react-icons/fa";
-import dotenv from "dotenv";
-dotenv.config();
 
 const PrivacyToggle = ({
   initialPrivacy = false,

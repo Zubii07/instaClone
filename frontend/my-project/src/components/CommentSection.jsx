@@ -1,7 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
 import { MoreVertical, Edit2, Trash2 } from "lucide-react";
-import dotenv from "dotenv";
-dotenv.config();
 
 export const CommentSection = ({ postId, loggedInUserId, postAuthorId }) => {
   const [comments, setComments] = useState([]);
